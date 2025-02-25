@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { closeSideBar } from "../utils/sideBarSlice";
 import {
@@ -26,17 +26,18 @@ const WatchPage = () => {
   const [showDescription, setShowDescription] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
+  const sideBarView=useSelector(store=>store.sideBar.isMenuOpen)
   useEffect(() => {
     dispatch(closeSideBar());
     videoData();
-  }, []);
+  }, [searchParams.get('v')]);
   useEffect(() => {
     if (videoInfo) {
       channelData();
       getComments();
       getRelatedVideos();
     }
-  }, [videoInfo]);
+  }, [videoInfo,searchParams.get('v')]);
   const videoData = async () => {
     const response = await fetch(
       Video_Data + `&id=${searchParams.get("v")}`
@@ -57,7 +58,7 @@ const WatchPage = () => {
     const response = await fetch(relatedVideosURL + "&relatedtovideoid=" + videoInfo.id);
     // const response=await fetch(Video_URL+'&videoCategoryId='+videoInfo?.snippet?.categoryId);
     const json = await response.json();
-    console.log(json, "related");
+    console.log(json?.items[1]?.snippet?.thumbnails?.default?.url?.split('/')[4], "related");
     setRelatedVideos(json?.items);
   };
   const getComments = async () => {
@@ -67,7 +68,7 @@ const WatchPage = () => {
     setComments(json?.items);
   };
   return (
-    <div className="grid grid-cols-2 px-28 mt-4 grid-flow-col gap-10">
+    <div className={"grid grid-cols-2 mt-4 grid-flow-col gap-10 " +(sideBarView?'ml-5':'mx-24')}>
       <div className="col-span-11 ">
         <iframe
           className="rounded-lg w-full h-[30rem]"
@@ -137,9 +138,9 @@ const WatchPage = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-1 border-2 ">
+      <div className="col-span-1 ">
       {/* correct videoid */}
-        {relatedVideos?.map((video)=><Link to={{pathname:'/watch',search: `?v=${video?.id?.videoId}` }} state={video} key={video?.id}><RelatedVideos video={video}/></Link>)}
+        {relatedVideos?.map((video)=><Link to={{pathname:'/watch',search: `?v=${video?.snippet?.thumbnails?.default?.url?.split('/')[4]}` }} key={video?.snippet?.thumbnails?.default?.url?.split('/')[4]}><RelatedVideos video={video}/></Link>)}
       </div>
     </div>
   );  

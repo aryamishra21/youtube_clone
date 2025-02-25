@@ -26,7 +26,7 @@ const SideBar = () => {
     }
   const SideBarOpen = useSelector(store => store.sideBar.isMenuOpen);
   if(!SideBarOpen) return null;
-  return (<div className="w-[15rem] mx-2 h-screen overflow-y-scroll">
+  return (<div className="min-w-[15rem] mx-2 h-screen overflow-y-scroll">
     <p className="font-semibold p-4">Explore</p>
     <ul >
     {navOptions?.items?.map((option)=>{
