@@ -1,13 +1,16 @@
-const API_KEY='AIzaSyCLKgH7l7uz8-SEPzMBNjQpfXHyw81oENI'
-export const Video_URL='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key='+API_KEY
-export const categoriesURL='https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key='+API_KEY
-export const categoryData='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&videoCategoryId=10&key=AIzaSyCLKgH7l7uz8-SEPzMBNjQpfXHyw81oENI'
-export const Video_Data='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key='+API_KEY
-export const Channel_Data='https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key='+API_KEY
-export const relatedVideosURL='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&key='+API_KEY
-// &type=video for shorts
-// &relatedtovideoid=5roiw_xy-kc for related video
-export const commentURL='https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&key='+API_KEY
+export const Video_URL='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key='+process.env.REACT_APP_API_KEY
+export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=25&type=video&key='+process.env.REACT_APP_API_KEY
+export const LIVE_STATS='https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY
+// export const LIVE_STAT='https://youtube.googleapis.com/youtube/v3/videos?part=statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY+'&id=DR7iTwk8RhA,rIU06JWKs_A'
+export const categoriesURL='https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key='+process.env.REACT_APP_API_KEY
+export const categoryData='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&videoCategoryId=10&key='+process.env.REACT_APP_API_KEY
+export const Video_Data='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key='+process.env.REACT_APP_API_KEY
+export const Channel_Data='https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key='+process.env.REACT_APP_API_KEY
+export const relatedVideosURL='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&key='+process.env.REACT_APP_API_KEY
+export const SearchURL='http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='
+export const SearchResultsURL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key='+process.env.REACT_APP_API_KEY
+
+export const commentURL='https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&key='+process.env.REACT_APP_API_KEY
 
 export function convertNo(n) {
     const num = Number(n) || 0;

@@ -9,14 +9,13 @@ import {
   relatedVideosURL,
   timeSince,
   Video_Data,
-  Video_URL,
 } from "../utils/constants";
 import CommentContainer from "../components/CommentContainer";
 import { PiThumbsUp } from "react-icons/pi";
 import RelatedVideos from "../components/RelatedVideos";
 
 const WatchPage = () => {
-  const location = useLocation();
+  // const location = useLocation();
   // const videoInfo = location.state || {};
   const [videoInfo,setVideo]=useState(null);
   console.log(videoInfo, "state");

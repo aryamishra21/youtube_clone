@@ -21,5 +21,3 @@ const AppLayout = () => {
 
 
 export default AppLayout
-
-// Category - https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=AIzaSyCLKgH7l7uz8-SEPzMBNjQpfXHyw81oENI
