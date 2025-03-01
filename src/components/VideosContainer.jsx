@@ -6,27 +6,32 @@ import VideoCard from './VideoCard';
 import { Link } from 'react-router-dom';
 
 const VideosContainer = () => {
-  // console.log('vc')
     const dispatch=useDispatch();
     const videos=useSelector(store=>store.homePage.videos)
     const [videosId,setVideosId]=useState([]);
     useEffect(()=>{
       if(!videos){
         getVideos();
-        console.log(videos?.[0]?.snippet?.liveBroadcastContent,'ls')
-        if(videos?.[0]?.snippet?.liveBroadcastContent==='live' && videos?.[1]?.snippet?.liveBroadcastContent==='live' && videos?.[2]?.snippet?.liveBroadcastContent==='live' ){
-          console.log('liv vid id1',videos.map((video)=>video?.id?.videoId))
-          setVideosId(videos.map((video)=>video?.id?.videoId))
-          getLiveVidDetails(videosId)
-        }
       }
     },[])
+    useEffect(()=>{
+      if(videos?.[0]?.snippet?.liveBroadcastContent){        
+        if(videos?.[0]?.snippet?.liveBroadcastContent==='live' && videos?.[1]?.snippet?.liveBroadcastContent==='live' && videos?.[2]?.snippet?.liveBroadcastContent==='live' ){
+          console.log('liv vid id1',videos.map((video)=>video?.id?.videoId))
+          const newVideoIds = videos.map(video => video?.id?.videoId).filter(Boolean);
+          setVideosId(newVideoIds);
+        }
+      }
+    },[videos])
+    useEffect(()=>{
+      if(videosId.length>0){
+        getLiveVidDetails(videosId)
+      }
+    },[videosId])
     const getVideos=async()=>{
-      // dispatch(resetVideos())
         console.log('here')
         const response=await fetch(Video_URL)
         const json=await response.json();
-        // console.log(json,'data')
         dispatch(setVideos(json?.items))
     }
     const getLiveVidDetails=async(ids)=>{
@@ -38,7 +43,7 @@ const VideosContainer = () => {
     if (!videos) return null
   return (
     <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 '>
-        {videos.map((video)=><Link to={{pathname:'/watch',search: `?v=${video?.id?.videoId?video?.id?.videoId:video?.id}` }} key={video?.id?.videoId?video?.id?.videoId:video?.id}><VideoCard info={video}/></Link>)}
+        {videos.map((video)=><Link to={{pathname:'/watch',search: `?v=${video.id.videoId? video.id.videoId :video.id}` }} key={video.id.videoId?video.id.videoId:video.id}><VideoCard info={video}/></Link>)}
     </div>
   )
 }

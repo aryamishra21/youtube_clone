@@ -1,5 +1,5 @@
 export const Video_URL='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key='+process.env.REACT_APP_API_KEY
-export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=25&type=video&key='+process.env.REACT_APP_API_KEY
+export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=2&type=video&key='+process.env.REACT_APP_API_KEY
 export const LIVE_STATS='https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY
 // export const LIVE_STAT='https://youtube.googleapis.com/youtube/v3/videos?part=statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY+'&id=DR7iTwk8RhA,rIU06JWKs_A'
 export const categoriesURL='https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key='+process.env.REACT_APP_API_KEY
@@ -9,9 +9,14 @@ export const Channel_Data='https://youtube.googleapis.com/youtube/v3/channels?pa
 export const relatedVideosURL='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&key='+process.env.REACT_APP_API_KEY
 export const SearchURL='http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='
 export const SearchResultsURL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key='+process.env.REACT_APP_API_KEY
-
 export const commentURL='https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&key='+process.env.REACT_APP_API_KEY
 
+export const LiveChatURL='https://youtube.googleapis.com/youtube/v3/liveChat/messages?part=snippet,authorDetails&key='+process.env.REACT_APP_API_KEY
+// +'&liveChatId=Cg0KC2YxSFFRUDltVUY4KicKGFVDSmc5d0JQeUtNTkE1c1JEbnZ6bWtkZxILZjFIUVFQOW1VRjg&pageToken=CBkQAA'
+
+
+// get active live chat id and it to livechat urll to get chat
+export const removeChatCount=10
 export function convertNo(n) {
     const num = Number(n) || 0;
     const suffixes = ['', 'K', 'M', 'B', 'T'];
@@ -53,3 +58,57 @@ export function timeSince(date) {
 
     return 'just now';
 }
+
+export function generateId(length) {
+    let result = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  }
+
+
+
+// LiveChatURL=>
+// {
+//     "kind": "youtube#liveChatMessageListResponse",
+//     "etag": "6-9etgz7_GIUef7yOwFN7gkCV0E",
+//     "pollingIntervalMillis": 4966,
+//     "pageInfo": {
+//       "totalResults": 261,
+//       "resultsPerPage": 261
+//     },
+//     "nextPageToken": "GIGsrc6c54sDIKGX6tGc54sD",
+//     "items": [
+//       {
+//         "kind": "youtube#liveChatMessage",
+//         "etag": "kPLcEGbuGTQ3rOqO7xHffc0TI6g",
+//         "id": "LCC.EhwKGkNMN3F2X2FiNTRzREZma3UxZ0Fkb3VrclNB",
+//         "snippet": {
+//           "type": "textMessageEvent",
+//           "liveChatId": "Cg0KC2YxSFFRUDltVUY4KicKGFVDSmc5d0JQeUtNTkE1c1JEbnZ6bWtkZxILZjFIUVFQOW1VRjg",
+//           "authorChannelId": "UCsTPa0itY-DXLwf0ioT7Dtw",
+//           "publishedAt": "2025-02-28T20:35:21.208241+00:00",
+//           "hasDisplayContent": true,
+//           "displayMessage": "I am very sad and angry that Donald Trump cant decipher lies from truth. It was painful to watch how Trump JD Vance where screaming like two gopniks in sports \"suits\".",
+//           "textMessageDetails": {
+//             "messageText": "I am very sad and angry that Donald Trump cant decipher lies from truth. It was painful to watch how Trump JD Vance where screaming like two gopniks in sports \"suits\"."
+//           }
+//         },
+//         "authorDetails": {
+//           "channelId": "UCsTPa0itY-DXLwf0ioT7Dtw",
+//           "channelUrl": "http://www.youtube.com/channel/UCsTPa0itY-DXLwf0ioT7Dtw",
+//           "displayName": "dains",
+//           "profileImageUrl": "https://yt3.ggpht.com/ytc/AIdro_nAfgF6K5IdbfeVmXs2Tk7QJE9ncJXZNiVCvJyW0Ws=s88-c-k-c0x00ffffff-no-rj",
+//           "isVerified": false,
+//           "isChatOwner": false,
+//           "isChatSponsor": false,
+//           "isChatModerator": false
+//         }
+//       },
+// }

@@ -13,12 +13,15 @@ import {
 import CommentContainer from "../components/CommentContainer";
 import { PiThumbsUp } from "react-icons/pi";
 import RelatedVideos from "../components/RelatedVideos";
+import LiveChat from "../components/LiveChat";
+import { addLiveChatCurrVideoId } from "../utils/liveChatSlice";
 
 const WatchPage = () => {
   // const location = useLocation();
   // const videoInfo = location.state || {};
   const [videoInfo,setVideo]=useState(null);
-  console.log(videoInfo, "state");
+  const [videoId,setVideoId]=useState(null);
+  // console.log(videoInfo, "state");
   const [channel, setChannelData] = useState(null);
   const [comments, setComments] = useState(null);
   const [relatedVideos, setRelatedVideos] = useState(null);
@@ -38,11 +41,14 @@ const WatchPage = () => {
     }
   }, [videoInfo,searchParams.get('v')]);
   const videoData = async () => {
+    console.log('vid')
     const response = await fetch(
       Video_Data + `&id=${searchParams.get("v")}`
     );
     const json = await response.json();
-    // console.log(json, "channel");
+    console.log(json, "channel");
+    dispatch(addLiveChatCurrVideoId(json?.items[0]?.id))
+    // setVideoId(json?.items[0]?.id)
     setVideo(json?.items[0]);
   };
   const channelData = async () => {
@@ -57,7 +63,7 @@ const WatchPage = () => {
     const response = await fetch(relatedVideosURL + "&relatedtovideoid=" + videoInfo.id);
     // const response=await fetch(Video_URL+'&videoCategoryId='+videoInfo?.snippet?.categoryId);
     const json = await response.json();
-    console.log(json?.items[1]?.snippet?.thumbnails?.default?.url?.split('/')[4], "related");
+    // console.log(json?.items[1]?.snippet?.thumbnails?.default?.url?.split('/')[4], "related");
     setRelatedVideos(json?.items);
   };
   const getComments = async () => {
@@ -138,7 +144,8 @@ const WatchPage = () => {
         </div>
       </div>
       <div className="col-span-1 ">
-      {/* correct videoid */}
+        {/* {videoInfo?.snippet?.liveBroadcastContent=='live' && <LiveChat videoId={videoInfo?.id} nextPageToken={pageToken}/>} */}
+        <LiveChat/>
         {relatedVideos?.map((video)=><Link to={{pathname:'/watch',search: `?v=${video?.snippet?.thumbnails?.default?.url?.split('/')[4]}` }} key={video?.snippet?.thumbnails?.default?.url?.split('/')[4]}><RelatedVideos video={video}/></Link>)}
       </div>
     </div>

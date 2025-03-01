@@ -2,13 +2,8 @@ import React, { useEffect } from 'react'
 import { convertNo, timeSince } from '../utils/constants';
 
 const VideoCard = ({info}) => {
-  // console.log(info?.snippet?.liveBroadcastContent,'vid')
   const {snippet}=info;
   const{title, channelTitle}=snippet;
-  // useEffect(()=>{
-  //   if()
-  // },[])
-  // const{viewCount}=statistics;
   return (
     <div className='cursor-pointer max-w-[28rem] '>
         <div className='h-[14rem]'>
