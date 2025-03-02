@@ -71,21 +71,21 @@ const WatchPage = () => {
     const json = await response.json();
     // console.log(json?.items[1]?.snippet?.thumbnails?.default?.url?.split('/')[4], "related");
     const ids=json?.items?.map((item)=>item?.id?.videoId)
-    console.log(json?.items,'getrelvidids')
+    // console.log(json?.items,'getrelvidids')
     setRelatedVideosId(ids)
     setRelatedVideos(json?.items);
 
   };
       useEffect(()=>{
         if(relatedVideosId){
-          console.log(relatedVideosId,'relid')
+          // console.log(relatedVideosId,'relid')
           fetchViews()
         }
       },[relatedVideosId])
       const fetchViews=async()=>{
         const response=await fetch(relatedVideoStat+'&id='+relatedVideosId.join(','))
         const json=await response.json()
-        console.log(json?.items?.map((item)=>item?.statistics?.viewCount),'views')
+        // console.log(json?.items?.map((item)=>item?.statistics?.viewCount),'views')
         const viewsArr=json?.items?.map((item)=>item?.statistics?.viewCount)
         setViews(viewsArr)
       }

@@ -35,7 +35,7 @@ const VideosContainer = () => {
         dispatch(setVideos(json?.items))
     }
     const getLiveVidDetails=async(ids)=>{
-      console.log('live vid id2 ',ids)
+      // console.log('live vid id2 ',ids)
       const response=await fetch(LIVE_STATS+'&id='+ids.join(','))
       const json=await response.json();
       dispatch(setVideos(json?.items))

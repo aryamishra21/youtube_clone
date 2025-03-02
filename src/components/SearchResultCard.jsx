@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { convertNo, timeSince, Video_Data } from '../utils/constants'
 
 const SearchResultCard = ({info}) => {
-  console.log('info',info)
+  // console.log('info',info)
   const[video,setVideo]=useState('')
   const {snippet}=info
     useEffect(()=>{

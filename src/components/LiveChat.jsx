@@ -19,7 +19,7 @@ const LiveChat = () => {
   const chatDivRef = useRef(null);
   useLiveChat();
 
-  console.log(liveChatData, "chatdata");
+  // console.log(liveChatData, "chatdata");
   useEffect(() => {
     if (chatDivRef.current) {
       chatDivRef.current.scrollTop = chatDivRef.current.scrollHeight;

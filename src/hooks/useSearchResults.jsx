@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { SearchResultsURL } from '../utils/constants';
 const useSearchResults = (props) => {
   const format=props?.replace(' ','%20')
-  console.log(props,'props',format)
+  // console.log(props,'props',format)
     const[searchData,setSearchData]=useState(null);
     useEffect(()=>{
       getData()
