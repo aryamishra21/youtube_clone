@@ -11,7 +11,7 @@ const VideoCard = ({info}) => {
         </div>
       <p className='font-semibold'>{title}</p>
       <p className='text-sm text-gray-600'>{channelTitle}</p>
-      <p className='text-sm text-gray-700'>{convertNo(info.liveStreamingDetails? info.liveStreamingDetails.concurrentViewers: info.statistics?.viewCount)}  • {timeSince(new Date(snippet?.publishedAt))}</p>
+      <p className='text-sm text-gray-700'>{convertNo(info.liveStreamingDetails? info.liveStreamingDetails.concurrentViewers: info.statistics?.viewCount)}{info.liveStreamingDetails?' watching':' Views'}  • {timeSince(new Date(snippet?.publishedAt))}</p>
     </div>
   )
 }

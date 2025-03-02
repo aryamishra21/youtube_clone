@@ -1,22 +1,21 @@
 export const Video_URL='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key='+process.env.REACT_APP_API_KEY
-export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=2&type=video&key='+process.env.REACT_APP_API_KEY
+export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=3&type=video&key='+process.env.REACT_APP_API_KEY
 export const LIVE_STATS='https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY
-// export const LIVE_STAT='https://youtube.googleapis.com/youtube/v3/videos?part=statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY+'&id=DR7iTwk8RhA,rIU06JWKs_A'
 export const categoriesURL='https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key='+process.env.REACT_APP_API_KEY
 export const categoryData='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&videoCategoryId=10&key='+process.env.REACT_APP_API_KEY
 export const Video_Data='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key='+process.env.REACT_APP_API_KEY
 export const Channel_Data='https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key='+process.env.REACT_APP_API_KEY
-export const relatedVideosURL='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&key='+process.env.REACT_APP_API_KEY
+export const relatedVideosURL='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&type=video&key='+process.env.REACT_APP_API_KEY
 export const SearchURL='http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='
 export const SearchResultsURL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key='+process.env.REACT_APP_API_KEY
 export const commentURL='https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&key='+process.env.REACT_APP_API_KEY
-
+export const relatedVideoStat='https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&key='+process.env.REACT_APP_API_KEY
 export const LiveChatURL='https://youtube.googleapis.com/youtube/v3/liveChat/messages?part=snippet,authorDetails&key='+process.env.REACT_APP_API_KEY
 // +'&liveChatId=Cg0KC2YxSFFRUDltVUY4KicKGFVDSmc5d0JQeUtNTkE1c1JEbnZ6bWtkZxILZjFIUVFQOW1VRjg&pageToken=CBkQAA'
 
 
 // get active live chat id and it to livechat urll to get chat
-export const removeChatCount=10
+export const removeChatCount=200
 export function convertNo(n) {
     const num = Number(n) || 0;
     const suffixes = ['', 'K', 'M', 'B', 'T'];

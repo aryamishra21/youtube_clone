@@ -6,6 +6,7 @@ import {
   Channel_Data,
   commentURL,
   convertNo,
+  relatedVideoStat,
   relatedVideosURL,
   timeSince,
   Video_Data,
@@ -21,11 +22,14 @@ const WatchPage = () => {
   // const videoInfo = location.state || {};
   const [videoInfo,setVideo]=useState(null);
   const [videoId,setVideoId]=useState(null);
+  const liveChatCurrVideoId=useSelector(store=>store.liveChat.liveChatCurrVideoId)
   // console.log(videoInfo, "state");
   const [channel, setChannelData] = useState(null);
   const [comments, setComments] = useState(null);
   const [relatedVideos, setRelatedVideos] = useState(null);
+  const [relatedVideosId, setRelatedVideosId] = useState(null);
   const [showDescription, setShowDescription] = useState(false);
+  const [views,setViews]=useState()
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const sideBarView=useSelector(store=>store.sideBar.isMenuOpen)
@@ -41,12 +45,12 @@ const WatchPage = () => {
     }
   }, [videoInfo,searchParams.get('v')]);
   const videoData = async () => {
-    console.log('vid')
+    // console.log('vid')
     const response = await fetch(
       Video_Data + `&id=${searchParams.get("v")}`
     );
     const json = await response.json();
-    console.log(json, "channel");
+    // console.log(json, "channel");  
     dispatch(addLiveChatCurrVideoId(json?.items[0]?.id))
     // setVideoId(json?.items[0]?.id)
     setVideo(json?.items[0]);
@@ -59,13 +63,47 @@ const WatchPage = () => {
     // console.log(json, "channel");
     setChannelData(json?.items[0]);
   };
+
+
   const getRelatedVideos = async () => {
     const response = await fetch(relatedVideosURL + "&relatedtovideoid=" + videoInfo.id);
     // const response=await fetch(Video_URL+'&videoCategoryId='+videoInfo?.snippet?.categoryId);
     const json = await response.json();
     // console.log(json?.items[1]?.snippet?.thumbnails?.default?.url?.split('/')[4], "related");
+    const ids=json?.items?.map((item)=>item?.id?.videoId)
+    console.log(json?.items,'getrelvidids')
+    setRelatedVideosId(ids)
     setRelatedVideos(json?.items);
+
   };
+      useEffect(()=>{
+        if(relatedVideosId){
+          console.log(relatedVideosId,'relid')
+          fetchViews()
+        }
+      },[relatedVideosId])
+      const fetchViews=async()=>{
+        const response=await fetch(relatedVideoStat+'&id='+relatedVideosId.join(','))
+        const json=await response.json()
+        console.log(json?.items?.map((item)=>item?.statistics?.viewCount),'views')
+        const viewsArr=json?.items?.map((item)=>item?.statistics?.viewCount)
+        setViews(viewsArr)
+      }
+  // const getRelatedVideos = async () => {
+  //   const response = await fetch(relatedVideosURL + "&relatedtovideoid=" + videoInfo.id);
+  //   const json = await response.json();
+    
+  //   // Get detailed video statistics for related videos
+  //   const videoIds = json.items.map(item => item.id.videoId).join(',');
+  //   const detailsResponse = await fetch(
+  //     `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics,liveStreamingDetails&id=${videoIds}&key=${process.env.REACT_APP_API_KEY}`
+  //   );
+  //   const detailsJson = await detailsResponse.json();
+    
+  //   setRelatedVideos(detailsJson.items);
+  // };
+
+
   const getComments = async () => {
     const response = await fetch(commentURL + "&videoId=" + videoInfo.id);
     const json = await response.json();
@@ -139,14 +177,22 @@ const WatchPage = () => {
             {convertNo(videoInfo?.statistics?.commentCount) } Comments
           </p>
           <div>
-            <CommentContainer commentData={comments} />
+          {!liveChatCurrVideoId && <CommentContainer commentData={comments} />}
           </div>
         </div>
       </div>
       <div className="col-span-1 ">
         {/* {videoInfo?.snippet?.liveBroadcastContent=='live' && <LiveChat videoId={videoInfo?.id} nextPageToken={pageToken}/>} */}
-        <LiveChat/>
-        {relatedVideos?.map((video)=><Link to={{pathname:'/watch',search: `?v=${video?.snippet?.thumbnails?.default?.url?.split('/')[4]}` }} key={video?.snippet?.thumbnails?.default?.url?.split('/')[4]}><RelatedVideos video={video}/></Link>)}
+        {liveChatCurrVideoId && <LiveChat/>}
+        {relatedVideos?.map((video,i)=><Link to={{pathname:'/watch',search: `?v=${video?.snippet?.thumbnails?.default?.url?.split('/')[4]}` }} key={video?.snippet?.thumbnails?.default?.url?.split('/')[4]}><RelatedVideos video={video} views={views?.[i]}/></Link>)}
+        {/* {relatedVideos?.map((video) => (
+  <Link 
+    to={`/watch?v=${video.id}`} 
+    key={video.id}
+  >
+    <RelatedVideos video={video} />
+  </Link>
+))} */}
       </div>
     </div>
   );  

@@ -17,7 +17,7 @@ const VideosContainer = () => {
     useEffect(()=>{
       if(videos?.[0]?.snippet?.liveBroadcastContent){        
         if(videos?.[0]?.snippet?.liveBroadcastContent==='live' && videos?.[1]?.snippet?.liveBroadcastContent==='live' && videos?.[2]?.snippet?.liveBroadcastContent==='live' ){
-          console.log('liv vid id1',videos.map((video)=>video?.id?.videoId))
+          // console.log('liv vid id1',videos.map((video)=>video?.id?.videoId))
           const newVideoIds = videos.map(video => video?.id?.videoId).filter(Boolean);
           setVideosId(newVideoIds);
         }
@@ -29,7 +29,7 @@ const VideosContainer = () => {
       }
     },[videosId])
     const getVideos=async()=>{
-        console.log('here')
+        // console.log('here')
         const response=await fetch(Video_URL)
         const json=await response.json();
         dispatch(setVideos(json?.items))
@@ -43,7 +43,9 @@ const VideosContainer = () => {
     if (!videos) return null
   return (
     <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 '>
-        {videos.map((video)=><Link to={{pathname:'/watch',search: `?v=${video.id.videoId? video.id.videoId :video.id}` }} key={video.id.videoId?video.id.videoId:video.id}><VideoCard info={video}/></Link>)}
+        {/* {videos.map((video)=><Link to={{pathname:'/watch',search: `?v=${video.id.videoId? video.id.videoId :video.id}` }} key={video.id.videoId?video.id.videoId:video.id}><VideoCard info={video}/></Link>)} */}
+        {videos.map((video)=><Link to={`/watch?v=${video.id.videoId || video.id}`} key={video.id.videoId || video.id}><VideoCard info={video}/></Link>)}
+
     </div>
   )
 }

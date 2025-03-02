@@ -22,7 +22,7 @@ const LiveChat = () => {
   console.log(liveChatData, "chatdata");
   useEffect(() => {
     if (chatDivRef.current) {
-      chatDivRef.current.scrollBottom = chatDivRef.current.scrollHeight;
+      chatDivRef.current.scrollTop = chatDivRef.current.scrollHeight;
     }
   }, [liveChatData]);
   if (!liveChatCurrVideoId || !nextPageOffset) return;
@@ -33,25 +33,27 @@ const LiveChat = () => {
 
       {/* chat message */}
       <div
-        className="w-full h-[84%]  overflow-y-scroll flex flex-col-reverse"
+        className="w-full h-[84%]  overflow-y-scroll"
         ref={chatDivRef}
       >
         {liveChatData.map((chat) => {
           return (
-            <div className="max-w-[25rem]" key={chat?.snippet?.liveChatId}>
+            <div className="max-w-[25rem]" key={chat?.id}>
               <div className="p-2 flex justify-between ">
+                <div className="w-[3rem]">
                 <img
                   src={chat?.authorDetails?.profileImageUrl}
                   alt="img"
                   className="size-[1.5rem] rounded-full "
                 />
-                <div className="flex gap-3 w-[90%] text-[0.8rem]">
+                </div>
+                <div className="flex gap-3 w-[22rem] text-[0.8rem] flex-wrap">
                   <p className="font-semibold text-gray-500">
                     {chat?.authorDetails?.displayName}
                   </p>
                   <p className="">
-                    {chat?.snippet?.displayMessage ||
-                      chat?.snippet?.textMessageDetails?.messageText}
+                    {/* {chat?.snippet?.displayMessage || */}
+                     { chat?.snippet?.textMessageDetails?.messageText}
                   </p>
                 </div>
               </div>
@@ -68,13 +70,12 @@ const LiveChat = () => {
             dispatch(
               addLiveChatData([
                 {
-                  // id: generateId(30),
+                  id: generateId(30),
                   snippet: {
                     displayMessage: yourMsg,
                     textMessageDetails: {
                       messageText: yourMsg,
                     },
-                    liveChatId: generateId(30),
                   },
                   authorDetails: {
                     displayName: "User",
@@ -84,6 +85,7 @@ const LiveChat = () => {
                 },
               ])
             );
+            setYourMsg('');
           }}
         >
           <input
