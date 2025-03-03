@@ -20,18 +20,18 @@ const getMovieViews=async()=>{
     }
 
   return (
-    <div  className='flex  gap-5 my-10 cursor-pointer w-[80vw] mx-auto' >
-        <div className='w-[40%] h-[18rem]'>
+    <div  className='flex flex-col md:flex-row gap-5 my-10 cursor-pointer lg:w-[80vw] w-[90vw] mx-auto' >
+        <div className='lg:w-[50%] sm:w-[60%] sm:h-[18rem] h-[16rem]'>
         <img src={snippet.thumbnails.high.url} className='rounded-lg size-full object-cover' />
         </div>
-        <div className='text-[0.8rem] w-[60%]'>
+        <div className='text-[0.8rem] lg:w-[45%] sm:w-[40%]'>
             <p className='text-lg my-1'>{snippet.title}</p>
             <p className='text-gray-500 font-semibold '>{convertNo(video?.statistics?.viewCount)} Views • {timeSince (new Date(snippet.publishedAt))}</p>
             <div className='mt-2 mb-4'>
             {/* <img src='' alt="" /> */}
             <p className='text-gray-600 my-2 font-bold text-sm'>{snippet.channelTitle}</p>
             </div>
-            <p className='w-[80%] text-gray-700 text-sm'>{video?.snippet?.description.slice(0,100)}</p>
+            <p className='w-[80%] text-gray-700 text-sm'>{video?.snippet?.description.slice(0,100)}...</p>
         </div>
     </div>
   )

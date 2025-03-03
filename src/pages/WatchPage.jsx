@@ -111,10 +111,10 @@ const WatchPage = () => {
     setComments(json?.items);
   };
   return (
-    <div className={"grid grid-cols-2 mt-4 grid-flow-col gap-10 " +(sideBarView?'ml-5':'mx-24')}>
-      <div className="col-span-11 ">
+    <div className={"lg:grid lg:grid-cols-2 mt-4 grid-flow-col gap-10 " +(sideBarView?'md:mx-5 xl:mx-24':'md:mx-5 xl:mx-24')}>
+      <div className="lg:col-span-11 w-[95vw] mx-auto">
         <iframe
-          className="rounded-lg w-full h-[30rem]"
+          className="rounded-lg w-full h-[20rem] md:h-[30rem]"
           src={`https://www.youtube.com/embed/${searchParams.get("v")}`}
           title="YouTube video player"
           frameborder="0"
@@ -172,16 +172,16 @@ const WatchPage = () => {
         </div>
 
         {/* comments  */}
-        <div className="my-5">
+        <div className="my-5 w-full">
           <p className="font-bold text-xl">
             {convertNo(videoInfo?.statistics?.commentCount) } Comments
           </p>
           <div>
-          {!liveChatCurrVideoId && <CommentContainer commentData={comments} />}
+          <CommentContainer commentData={comments} />
           </div>
         </div>
       </div>
-      <div className="col-span-1 ">
+      <div className="lg:col-span-1 w-[95%] mx-auto">
         {/* {videoInfo?.snippet?.liveBroadcastContent=='live' && <LiveChat videoId={videoInfo?.id} nextPageToken={pageToken}/>} */}
         {liveChatCurrVideoId && <LiveChat/>}
         {relatedVideos?.map((video,i)=><Link to={{pathname:'/watch',search: `?v=${video?.snippet?.thumbnails?.default?.url?.split('/')[4]}` }} key={video?.snippet?.thumbnails?.default?.url?.split('/')[4]}><RelatedVideos video={video} views={views?.[i]}/></Link>)}

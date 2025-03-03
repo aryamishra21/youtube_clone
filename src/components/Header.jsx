@@ -67,8 +67,8 @@ const Header = () => {
     dispatch(setVideos(json?.items));
   };
   return (
-    <div className="shadow-md py-3 flex">
-      <div className="w-[10rem] flex items-center mx-2">
+    <div className="shadow-md py-3 flex flex-col sm:flex-row mx-auto sm:mx-0 ">
+      <div className="w-[10rem] flex items-center sm:mx-2 mx-auto ">
         <LuMenu
           className="size-[2.5rem] cursor-pointer rounded-full hover:bg-gray-200 p-2"
           onClick={handleSideBarView}
@@ -84,7 +84,7 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="w-[38rem] flex items-center lg:ml-[15rem] relative">
+      <div className="sm:w-[38rem] flex items-center xl:ml-[15rem] lg:ml-[5rem] relative">
         <input
           type="text"
           placeholder="Search"

@@ -39,7 +39,7 @@ const SideBar = () => {
     }
   const SideBarOpen = useSelector(store => store.sideBar.isMenuOpen);
   if(!SideBarOpen) return null;
-  return (<div className="min-w-[15rem] mx-2 h-screen overflow-y-scroll">
+  return (<div className="fixed xl:relative w-full sm:w-[15rem] bg-white sm:flex sm:flex-col lg:min-w-[15rem] mx-2 h-screen overflow-y-scroll z-10">
     <p className="font-semibold p-4">Explore</p>
     <ul >
     <li key='live' className='p-3 mx-1 hover:bg-gray-200 text-sm rounded-lg cursor-pointer' onClick={()=>getLiveData()}>Live</li>

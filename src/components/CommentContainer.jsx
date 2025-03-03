@@ -13,7 +13,7 @@ const Comment=({comment})=>{
             <div className='text-sm'>
                 <div className='flex gap-2'>
             <p className='text-sm font-semibold my-1'>{comment?.snippet?.authorDisplayName}</p>
-            <p className='text-[0.8rem]  my-1'>{timeSince(new Date(comment?.snippet?.publishedAt))}</p>
+            <p className='text-[0.8rem] my-1'>{timeSince(new Date(comment?.snippet?.publishedAt))}</p>
                 </div>
             <p className=''>
              {comment?.snippet?.textDisplay}
@@ -32,7 +32,7 @@ const CommentList=({comments})=>{
         <div>
         {comments?.map((comment)=>{
             return(
-                <div className='my-5'>
+                <div className='my-5 '>
                     <Comment comment={comment?.snippet?.topLevelComment}/>
                     {
                         comment?.replies &&                     
@@ -57,7 +57,7 @@ const CommentList=({comments})=>{
 const CommentContainer = ({commentData}) => {
     // console.log(commentData,'comment Data')
   return (
-    <div>
+    <div className='w-full '>
         <CommentList comments={commentData}/>
     </div>
   )

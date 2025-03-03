@@ -6,7 +6,7 @@ const VideoCard = ({info}) => {
   const{title, channelTitle}=snippet;
   return (
     <div className='cursor-pointer max-w-[28rem] '>
-        <div className='h-[14rem]'>
+        <div className='sm:h-[13rem] xl:h-[15rem] h-[14rem]'>
             <img src={snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.medium?.url} alt="" className='rounded-lg w-full h-full object-fill'/>
         </div>
       <p className='font-semibold'>{title}</p>

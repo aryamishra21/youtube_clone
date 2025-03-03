@@ -42,7 +42,7 @@ const VideosContainer = () => {
     }
     if (!videos) return null
   return (
-    <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 '>
+    <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8  '>
         {/* {videos.map((video)=><Link to={{pathname:'/watch',search: `?v=${video.id.videoId? video.id.videoId :video.id}` }} key={video.id.videoId?video.id.videoId:video.id}><VideoCard info={video}/></Link>)} */}
         {videos.map((video)=><Link to={`/watch?v=${video.id.videoId || video.id}`} key={video.id.videoId || video.id}><VideoCard info={video}/></Link>)}
 
