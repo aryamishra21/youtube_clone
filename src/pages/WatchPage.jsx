@@ -111,10 +111,10 @@ const WatchPage = () => {
     setComments(json?.items);
   };
   return (
-    <div className={"lg:grid lg:grid-cols-2 mt-4 grid-flow-col gap-10 " +(sideBarView?'md:mx-5 xl:mx-24':'md:mx-5 xl:mx-24')}>
-      <div className="lg:col-span-11 w-[95vw] mx-auto">
+    <div className={"lg:grid lg:grid-cols-2 grid-flow-col gap-4 lg:gap-10 w-[100%] mt-24 " +(sideBarView?'mx-5':'md:mx-5 xl:mx-24')}>
+      <div className="lg:col-span-11 w-[95%] mx-auto ">
         <iframe
-          className="rounded-lg w-full h-[20rem] md:h-[30rem]"
+          className="rounded-lg w-full h-[15rem] sm:h-[30rem] md:h-[25rem] lg:h-[23rem] xl:h-[30rem]"
           src={`https://www.youtube.com/embed/${searchParams.get("v")}`}
           title="YouTube video player"
           frameborder="0"
@@ -172,7 +172,7 @@ const WatchPage = () => {
         </div>
 
         {/* comments  */}
-        <div className="my-5 w-full">
+        <div className="my-5">
           <p className="font-bold text-xl">
             {convertNo(videoInfo?.statistics?.commentCount) } Comments
           </p>

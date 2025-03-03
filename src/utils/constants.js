@@ -1,5 +1,5 @@
 export const Video_URL='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key='+process.env.REACT_APP_API_KEY
-export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=3&type=video&key='+process.env.REACT_APP_API_KEY
+export const LIVE_URL='https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=15&type=video&key='+process.env.REACT_APP_API_KEY
 export const LIVE_STATS='https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics,liveStreamingDetails&key='+process.env.REACT_APP_API_KEY
 export const categoriesURL='https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key='+process.env.REACT_APP_API_KEY
 export const categoryData='https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&videoCategoryId=10&key='+process.env.REACT_APP_API_KEY

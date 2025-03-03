@@ -40,20 +40,20 @@ const LiveChat = () => {
           return (
             <div className="max-w-[25rem]" key={chat?.id}>
               <div className="p-2 flex justify-between ">
-                <div className="w-[3rem]">
+                <div className="w-[10%] flex justify-center">
                 <img
                   src={chat?.authorDetails?.profileImageUrl}
                   alt="img"
                   className="size-[1.5rem] rounded-full "
                 />
                 </div>
-                <div className="flex gap-3 w-[22rem] text-[0.8rem] flex-wrap">
+                <div className="flex gap-3 w-[90%] text-[0.8rem] flex-wrap">
                   <p className="font-semibold text-gray-500">
                     {chat?.authorDetails?.displayName}
                   </p>
                   <p className="">
-                    {/* {chat?.snippet?.displayMessage || */}
-                     { chat?.snippet?.textMessageDetails?.messageText}
+                    {chat?.snippet?.displayMessage }
+                     {/* { chat?.snippet?.textMessageDetails?.messageText} */}
                   </p>
                 </div>
               </div>

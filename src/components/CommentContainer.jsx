@@ -6,17 +6,17 @@ import { PiThumbsUp } from "react-icons/pi";
 
 const Comment=({comment})=>{
     return(
-        <div className='flex gap-5 my-3 pr-3'>
+        <div className='flex gap-5 my-3 pr-3 shadow-sm text-wrap overflow-hidden '>
             {comment?.snippet?.authorProfileImageUrl ?
                 <img src={comment?.snippet?.authorProfileImageUrl} className='size-[3rem] rounded-full' alt='user'/>
              :<div className='size-[3rem] rounded-full bg-blue-500 flex items-center'><span>A</span></div>}
             <div className='text-sm'>
                 <div className='flex gap-2'>
-            <p className='text-sm font-semibold my-1'>{comment?.snippet?.authorDisplayName}</p>
+            <p className='text-sm font-semibold my-1  '>{comment?.snippet?.authorDisplayName}</p>
             <p className='text-[0.8rem] my-1'>{timeSince(new Date(comment?.snippet?.publishedAt))}</p>
                 </div>
             <p className=''>
-             {comment?.snippet?.textDisplay}
+             {comment?.snippet?.textOriginal}
             </p>
             <div className='flex items-center gap-1'>
             <PiThumbsUp className='size-[1.3rem] my-1'/>
@@ -28,12 +28,13 @@ const Comment=({comment})=>{
 }
 const CommentList=({comments})=>{
     const [showReplies,setShowReplies]=useState(false);
+    // console.log('comm',comments)
     return (
         <div>
         {comments?.map((comment)=>{
             return(
-                <div className='my-5 '>
-                    <Comment comment={comment?.snippet?.topLevelComment}/>
+                <div className='my-5 ' key={comment?.id}>
+                    <Comment comment={comment?.snippet?.topLevelComment} />
                     {
                         comment?.replies &&                     
                         <div className='ml-10'>

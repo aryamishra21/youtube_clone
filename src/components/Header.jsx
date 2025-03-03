@@ -5,13 +5,14 @@ import { RxCounterClockwiseClock } from "react-icons/rx";
 import { FaMicrophone } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { flipSideBar } from "../utils/sideBarSlice";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SearchURL, Video_URL } from "../utils/constants";
 import { resetVideos, setVideos } from "../utils/homePageSlice";
 import { addSearchQuery, addSearchSugg } from "../utils/searchBarSlice";
 import store from "../utils/Store";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const searchSuggData=useSelector(store=>store.searchBar.sugg);
   const dropdownRef = useRef(null);
   const location = useLocation();
@@ -67,7 +68,7 @@ const Header = () => {
     dispatch(setVideos(json?.items));
   };
   return (
-    <div className="shadow-md py-3 flex flex-col sm:flex-row mx-auto sm:mx-0 ">
+    <div className="shadow-md py-3 flex flex-col sm:flex-row mx-auto sm:mx-0 fixed z-10 bg-white w-full top-0">
       <div className="w-[10rem] flex items-center sm:mx-2 mx-auto ">
         <LuMenu
           className="size-[2.5rem] cursor-pointer rounded-full hover:bg-gray-200 p-2"
@@ -84,7 +85,12 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="sm:w-[38rem] flex items-center xl:ml-[15rem] lg:ml-[5rem] relative">
+      <form className="sm:w-[38rem] flex items-center xl:ml-[15rem] lg:ml-[5rem] relative" onSubmit={(e)=>{
+                e.preventDefault()
+                setShowSugg(false)
+                dispatch(addSearchQuery(searchText))
+                navigate(`/results?search_query=${searchText.replace(/ /g, '+')}`)
+                }}>
         <input
           type="text"
           placeholder="Search"
@@ -94,9 +100,9 @@ const Header = () => {
           setShowSugg(true)}}
           value={searchText}
         />
-        <div className="rounded-r-full border-[1px]  p-[0.5rem] bg-gray-100 border-gray-400 cursor-pointer">
+        <button className="rounded-r-full border-[1px]  p-[0.5rem] bg-gray-100 border-gray-400 cursor-pointer" type="submit">
           <IoSearchOutline className="size-[1.5rem] mx-2 p-[1px] " />
-        </div>
+        </button>
         {showSugg && 
         <div ref={dropdownRef} className="border-2 absolute top-[100%] w-[90%] bg-white rounded-lg">
           {searchSugg?.map((sug)=>{
@@ -112,7 +118,7 @@ const Header = () => {
             )
           })}
         </div>}
-      </div>
+      </form>
     </div>
   );
 };

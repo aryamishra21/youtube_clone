@@ -21,8 +21,8 @@ const getMovieViews=async()=>{
 
   return (
     <div  className='flex flex-col md:flex-row gap-5 my-10 cursor-pointer lg:w-[80vw] w-[90vw] mx-auto' >
-        <div className='lg:w-[50%] sm:w-[60%] sm:h-[18rem] h-[16rem]'>
-        <img src={snippet.thumbnails.high.url} className='rounded-lg size-full object-cover' />
+        <div className='lg:w-[40%] sm:w-[60%] sm:h-[18rem] h-[16rem]'>
+        <img src={snippet.thumbnails.high.url} className='rounded-lg size-full object-cover max-w-[30rem]' />
         </div>
         <div className='text-[0.8rem] lg:w-[45%] sm:w-[40%]'>
             <p className='text-lg my-1'>{snippet.title}</p>
