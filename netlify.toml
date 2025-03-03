@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "https://youtube.googleapis.com/"
+  to = "https://youtube.googleapis.com/"
+  status = 200
+
+[[redirects]]
+  from = "https://suggestqueries.google.com/"
+  to = "https://suggestqueries.google.com/"
+  status = 200
